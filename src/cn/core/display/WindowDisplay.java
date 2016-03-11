@@ -29,7 +29,7 @@ public interface WindowDisplay {
 	 * open an image file and return a BufferedImage instance
 	 * @return
 	 */
-	public BufferedImage openImage();
+	public BufferedImage openImage(String pathFile);
 	
 	/**
 	 * pathfile is the path of the saving image
