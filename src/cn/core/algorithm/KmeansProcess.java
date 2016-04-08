@@ -12,7 +12,7 @@ import java.util.Random;
  */
 public class KmeansProcess implements AlgoProcess {
 	
-	private int clusterNum = 3;
+	private int clusterNum = 8;
 	private double mu = 5;
 	private int width;
 	private int height;
@@ -34,6 +34,16 @@ public class KmeansProcess implements AlgoProcess {
 		
 	}
 	
+	//优化模式确定聚类中点
+	
+	public void initBymeans(){
+		InitKMeans init = new InitKMeans();
+		init.initAll(pixels, width, height);
+		this.centerList = init.getCenterList();
+		this.clusterNum = init.getK();
+	}
+	
+	//随机模式确定聚类中点
 	public void initClusterCenter(){
 		Random random = new Random();
 		for(int i = 0; i < clusterNum; i++){
@@ -90,7 +100,8 @@ public class KmeansProcess implements AlgoProcess {
 
 		initKmeans(image);
 		
-		initClusterCenter();
+//		initClusterCenter();//随机模式执行kmeans算法
+		initBymeans();//优化模式执行kmeans算法
 		
 		while(true){
 			clusterPoints();
